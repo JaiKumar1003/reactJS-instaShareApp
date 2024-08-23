@@ -3,6 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (min-width: 768px) {
+    height: 166px;
+  }
 }
 
 .slick-container {
@@ -15,7 +18,7 @@
 }
 
 .slick-item {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
 }
@@ -46,4 +49,10 @@ Previous Arrow buttons according to your project */
   font-weight: 400;
   line-height: 14px;
   text-align: center;
+}
+
+/* Customize the position of the arrows */
+.slick-prev,
+.slick-next {
+  transform: translateY(-160%); /* Center them relative to their height */
 }

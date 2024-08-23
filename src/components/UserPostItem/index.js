@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {BsHeart} from 'react-icons/bs'
 import {FaRegComment} from 'react-icons/fa'
 import {BiShareAlt} from 'react-icons/bi'
@@ -16,6 +17,7 @@ const UserPostItem = props => {
     profilePic,
     userName,
     message,
+    userId,
   } = postItem
   const isLiked = message === 'Post has been liked'
   const postImg = postDetails.image_url
@@ -29,7 +31,9 @@ const UserPostItem = props => {
           src={profilePic}
           alt="user profile"
         />
-        <p className="post-item-user-name">{userName}</p>
+        <Link className="link-el" to={`/users/${userId}`}>
+          <p className="post-item-user-name">{userName}</p>
+        </Link>
       </div>
       <div className="post-item-user-post-img-card">
         <img className="post-item-user-post-img" src={postImg} alt="post" />
@@ -97,8 +101,12 @@ const UserPostItem = props => {
 
           return (
             <li className="post-item-comment" key={commentUserId}>
-              {commentUserName}
-              <span className="post-item-comment-span">{` ${comment}`}</span>
+              <p className="post-comment-user-name">
+                <Link to={`/users/${commentUserId}`} className="link-el">
+                  {commentUserName}
+                </Link>
+                <span className="post-comment">{` ${comment}`}</span>
+              </p>
             </li>
           )
         })}

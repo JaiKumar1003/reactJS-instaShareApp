@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {IoMenu, IoCloseCircle} from 'react-icons/io5'
 import {FaSearch} from 'react-icons/fa'
 import Cookies from 'js-cookie'
@@ -26,27 +26,6 @@ class Header extends Component {
     history.replace('/login')
   }
 
-  renderSearchCard = () => (
-    <div className="header-search-card">
-      <input
-        className="header-search-input"
-        type="search"
-        placeholder="Search Caption"
-      />
-      <button
-        aria-label="search icon"
-        type="button"
-        className="header-search-button"
-      >
-        <FaSearch className="header-search-icon" />
-      </button>
-    </div>
-  )
-
-  onClickSearch = () => {
-    this.setState(prevState => ({isSearchClicked: !prevState.isSearchClicked}))
-  }
-
   render() {
     return (
       <MyContext.Consumer>
@@ -56,6 +35,10 @@ class Header extends Component {
             isMenuIconClicked,
             updateIsSearchClicked,
             updateIsMenuClicked,
+            searchInput,
+            updateSearchInput,
+            updateIsSearchButtonClicked,
+            updateSearchApiStatus,
           } = value
 
           const onClickSearch = () => {
@@ -64,25 +47,74 @@ class Header extends Component {
 
           const onClickMenuIcon = () => {
             updateIsSearchClicked(false)
-            updateIsMenuClicked()
+            updateIsMenuClicked(true)
+            updateSearchInput('')
           }
 
           const onClickCloseIcon = () => {
-            updateIsMenuClicked()
+            updateIsMenuClicked(false)
+          }
+
+          const onClickSearchButton = () => {
+            if (searchInput.length > 0) {
+              updateIsSearchButtonClicked(true)
+              updateSearchApiStatus('LOADING')
+            }
+          }
+
+          const onChangeSearchInput = event => {
+            updateSearchInput(event.target.value)
+          }
+
+          const renderSearchCard = () => (
+            <div className="header-search-card">
+              <input
+                value={searchInput}
+                onChange={onChangeSearchInput}
+                className="header-search-input"
+                type="search"
+                placeholder="Search Caption"
+              />
+              <button
+                onClick={onClickSearchButton}
+                aria-label="search icon"
+                type="button"
+                className="header-search-button"
+              >
+                <FaSearch className="header-search-icon" />
+              </button>
+            </div>
+          )
+
+          const onClickProfileBtn = () => {
+            const {history} = this.props
+            history.push('/my-profile')
+            updateIsSearchButtonClicked(false)
+            updateSearchInput('')
+          }
+
+          const onClickHomeBtn = () => {
+            const {history} = this.props
+            history.push('/')
+            updateIsSearchButtonClicked(false)
+            updateIsMenuClicked(false)
+            updateSearchInput('')
+            updateIsSearchClicked(false)
           }
 
           const renderSearchHomeProfileLogout = () => {
             const {currentPathName} = this.state
             return (
               <div className="header-home-profile-logout-card">
-                <Link
-                  to="/"
-                  className={`header-search-text-button ${
+                <button
+                  type="button"
+                  onClick={onClickHomeBtn}
+                  className={`header-home-profile-btn ${
                     currentPathName === '/' && 'add-style'
                   }`}
                 >
                   Home
-                </Link>
+                </button>
                 <button
                   onClick={onClickSearch}
                   className="header-search-text-button"
@@ -90,14 +122,15 @@ class Header extends Component {
                 >
                   Search
                 </button>
-                <Link
-                  to="/my-profile"
-                  className={`header-search-text-button ${
+                <button
+                  type="button"
+                  onClick={onClickProfileBtn}
+                  className={`header-home-profile-btn ${
                     currentPathName === '/my-profile' && 'add-style'
                   }`}
                 >
                   Profile
-                </Link>
+                </button>
                 <button
                   onClick={this.onClickLogoutButton}
                   className="header-logout-button"
@@ -121,12 +154,22 @@ class Header extends Component {
             <div className="header-container">
               <div className="header-website-logo-menu-card">
                 <div className="header-insta-share-img-text-card">
-                  <img
-                    className="header-insta-share-img"
-                    src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724140810/Standard_Collection_8_2x_rmjdky.png"
-                    alt="website logo"
-                  />
+                  <button
+                    className="header-logo-button"
+                    type="button"
+                    onClick={onClickHomeBtn}
+                  >
+                    <img
+                      className="header-insta-share-img"
+                      src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724140810/Standard_Collection_8_2x_rmjdky.png"
+                      alt="website logo"
+                    />
+                  </button>
                   <p className="header-insta-share-text">Insta Share</p>
+                </div>
+                <div className="header-search-home-profile-logout-card-lg">
+                  {renderSearchCard()}
+                  {renderSearchHomeProfileLogout()}
                 </div>
                 <button
                   aria-label="menu icon"
@@ -142,7 +185,7 @@ class Header extends Component {
                 renderSearchHomeProfileLogout()}
               {isMenuIconClicked && isSearchClicked && (
                 <div className="header-search-container">
-                  {this.renderSearchCard()}
+                  {renderSearchCard()}
                 </div>
               )}
             </div>

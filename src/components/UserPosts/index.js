@@ -95,8 +95,6 @@ class UserPosts extends Component {
       this.setState({
         postList: updatedData,
       })
-    } else {
-      this.setState({postApiStatus: statusObject.failure})
     }
   }
 

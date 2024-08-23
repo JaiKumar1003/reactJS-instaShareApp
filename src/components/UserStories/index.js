@@ -42,7 +42,7 @@ const settings = {
   ],
 }
 
-class ReactSlick extends Component {
+class UserStories extends Component {
   state = {
     storiesList: [],
     storyApiStatus: statusObject.loading,
@@ -129,4 +129,4 @@ class ReactSlick extends Component {
   }
 }
 
-export default ReactSlick
+export default UserStories

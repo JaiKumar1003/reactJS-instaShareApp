@@ -6,6 +6,8 @@ import Cookies from 'js-cookie'
 import Header from '../Header'
 import UserStories from '../UserStories'
 import UserPosts from '../UserPosts'
+import UserSearchPosts from '../UserSearchPosts'
+import UserSearchPage from '../UserSearchPage'
 import MyContext from '../../context/MyContext'
 
 import './index.css'
@@ -25,17 +27,26 @@ class Home extends Component {
     return (
       <MyContext.Consumer>
         {value => {
-          const {isMenuIconClicked} = value
+          const {
+            isMenuIconClicked,
+            isSearchClicked,
+            isSearchButtonClicked,
+          } = value
+
           return (
             <div className="home-container">
               <Header />
-              {!isMenuIconClicked && (
-                <>
-                  <UserStories />
-                  <hr className="home-horizontal-line" />
-                </>
-              )}
-              <UserPosts />
+              {!isSearchButtonClicked && isSearchClicked && <UserSearchPage />}
+              {!isSearchClicked &&
+                !isMenuIconClicked &&
+                !isSearchButtonClicked && (
+                  <>
+                    <UserStories />
+                    <hr className="home-horizontal-line" />
+                  </>
+                )}
+              {!isSearchClicked && !isSearchButtonClicked && <UserPosts />}
+              {isSearchButtonClicked && <UserSearchPosts />}
             </div>
           )
         }}

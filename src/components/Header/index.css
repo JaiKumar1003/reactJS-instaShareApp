@@ -3,6 +3,10 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  @media screen and (min-width: 768px) {
+    background-color: #ffffff;
+    height: 80px;
+  }
 }
 
 .header-website-logo-menu-card {
@@ -20,10 +24,23 @@
   align-items: center;
 }
 
+.header-logo-button {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  outline: none;
+}
+
 .header-insta-share-img {
   width: 55px;
   height: 28px;
   margin-right: 12px;
+  @media screen and (min-width: 768px) {
+    width: 59px;
+    height: 30px;
+  }
 }
 
 .header-insta-share-text {
@@ -31,15 +48,30 @@
   font-family: Roboto;
   font-size: 18px;
   font-weight: 500;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
 }
 
 .header-menu-button {
+  display: inline;
   background-color: transparent;
   border: none;
   padding: 0px;
   margin: 0px;
   cursor: pointer;
   outline: none;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header-search-home-profile-logout-card-lg {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .header-menu-icon {
@@ -59,15 +91,25 @@
   }
 }
 
-.header-home-profile-text {
+.header-home-profile-btn {
   color: #262626;
   font-family: Roboto;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    margin-right: 20px;
+  }
 }
 
 .header-search-text-button {
+  display: inline;
   background-color: transparent;
   border: none;
   padding: 0px;
@@ -79,6 +121,9 @@
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }
 
 .header-logout-button {
@@ -96,12 +141,16 @@
 }
 
 .header-menu-close-icon-button {
+  display: inline;
   background-color: transparent;
   border: none;
   padding: 0px;
   margin: 0px;
   cursor: pointer;
   outline: none;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }
 
 .header-menu-close-icon {
@@ -125,6 +174,10 @@
   border: 1px solid #dbdbdb;
   @media screen and (min-width: 576px) {
     width: 80%;
+    margin-top: 6px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-right: 20px;
   }
 }
 

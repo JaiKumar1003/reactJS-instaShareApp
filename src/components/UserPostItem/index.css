@@ -4,19 +4,31 @@
   align-items: center;
   width: 100%;
   margin-bottom: 14px;
+  @media screen and (min-width: 768px) {
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+  }
 }
 
 .post-item-user-img-name-card {
   display: flex;
   align-items: center;
   width: 90%;
+  @media screen and (min-width: 768px) {
+    height: 60px;
+    width: 94%;
+  }
 }
 
 .post-item-user-img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 10px;
+  @media screen and (min-width: 768px) {
+    margin-right: 12px;
+  }
 }
 
 .post-item-user-name {
@@ -39,6 +51,9 @@
   display: flex;
   flex-direction: column;
   width: 90%;
+  @media screen and (min-width: 768px) {
+    width: 94%;
+  }
 }
 
 .post-item-icons-card {
@@ -62,6 +77,10 @@
   color: #475569;
   width: 22px;
   height: 22px;
+  @media screen and (min-width: 768px) {
+    height: 24px;
+    width: 24px;
+  }
 }
 
 .post-item-likes-count-text {
@@ -90,17 +109,30 @@
   margin-top: 4px;
 }
 
+.link-el {
+  color: #262626;
+  text-decoration: none;
+  margin: 0px;
+}
+
 .post-item-comment {
+  display: flex;
+  list-style-type: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.post-comment-user-name {
   color: #262626;
   font-family: Roboto;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  list-style-type: none;
+  margin-top: 0px;
   margin-bottom: 4px;
 }
 
-.post-item-comment-span {
+.post-comment {
   color: #262626;
   font-family: Roboto;
   font-size: 12px;
@@ -113,4 +145,7 @@
   font-size: 10px;
   font-weight: 400;
   margin-top: 2px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 14px;
+  }
 }

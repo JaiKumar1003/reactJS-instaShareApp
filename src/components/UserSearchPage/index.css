@@ -1,0 +1,21 @@
+.search-page-card-sm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 80vh;
+}
+
+.search-page-img {
+  width: 54px;
+  height: 36px;
+}
+
+.search-page-text {
+  color: #989898;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}

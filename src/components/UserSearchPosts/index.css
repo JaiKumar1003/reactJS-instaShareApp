@@ -23,3 +23,21 @@
   width: 100%;
   list-style-type: none;
 }
+
+.search-result-text-card {
+  width: 90%;
+  @media screen and (min-width: 768px) {
+    width: 74%;
+  }
+}
+
+.search-result-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+  }
+}

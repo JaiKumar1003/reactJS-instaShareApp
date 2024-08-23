@@ -16,16 +16,19 @@ const statusObject = {
   failure: 'FAILURE',
 }
 
-class MyProfile extends Component {
-  state = {myProfileData: {}, myProfileApiStatus: statusObject.loading}
+class UserProfile extends Component {
+  state = {userProfileData: {}, userProfileApiStatus: statusObject.loading}
 
   componentDidMount() {
-    this.getMyProfileData()
+    this.getUserProfileData()
   }
 
-  getMyProfileData = async () => {
+  getUserProfileData = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
     const jwtToken = Cookies.get('jwt_token')
-    const url = 'https://apis.ccbp.in/insta-share/my-profile'
+    const url = `https://apis.ccbp.in/insta-share/users/${id}`
     const options = {
       method: 'GET',
       headers: {
@@ -37,25 +40,25 @@ class MyProfile extends Component {
     const data = await response.json()
 
     if (response.ok) {
-      const {profile} = data
+      const userDetails = data.user_details
       const updatedData = {
-        followersCount: profile.followers_count,
-        followingCount: profile.following_count,
-        id: profile.id,
-        posts: profile.posts,
-        postsCount: profile.posts_count,
-        profilePic: profile.profile_pic,
-        stories: profile.stories,
-        userId: profile.user_id,
-        userName: profile.user_name,
-        userBio: profile.user_bio,
+        followersCount: userDetails.followers_count,
+        followingCount: userDetails.following_count,
+        id: userDetails.id,
+        posts: userDetails.posts,
+        postsCount: userDetails.posts_count,
+        profilePic: userDetails.profile_pic,
+        stories: userDetails.stories,
+        userId: userDetails.user_id,
+        userName: userDetails.user_name,
+        userBio: userDetails.user_bio,
       }
       this.setState({
-        myProfileData: updatedData,
-        myProfileApiStatus: statusObject.success,
+        userProfileData: updatedData,
+        userProfileApiStatus: statusObject.success,
       })
     } else {
-      this.setState({myProfileApiStatus: statusObject.failure})
+      this.setState({userProfileApiStatus: statusObject.failure})
     }
   }
 
@@ -70,14 +73,14 @@ class MyProfile extends Component {
       <MyContext.Consumer>
         {value => {
           const {
-            isMenuIconClicked,
             isSearchClicked,
             isSearchButtonClicked,
+            updateIsSearchButtonClicked,
           } = value
-          const {myProfileApiStatus} = this.state
+          const {userProfileApiStatus} = this.state
 
           const renderUserNameBioImage = () => {
-            const {myProfileData} = this.state
+            const {userProfileData} = this.state
             const {
               followersCount,
               followingCount,
@@ -86,8 +89,7 @@ class MyProfile extends Component {
               userName,
               postsCount,
               profilePic,
-            } = myProfileData
-
+            } = userProfileData
             return (
               <div className="profile-user-id-name-image-bio-card">
                 <p className="profile-user-name">{userName}</p>
@@ -97,25 +99,32 @@ class MyProfile extends Component {
                     src={profilePic}
                     alt="profile"
                   />
-                  <div className="profile-post-followers-following-count-card">
-                    <p className="profile-post-followers-following-text">
-                      {postsCount}
-                      <span className="profile-post-followers-following-span">
-                        posts
-                      </span>
-                    </p>
-                    <p className="profile-post-followers-following-text">
-                      {followersCount}
-                      <span className="profile-post-followers-following-span">
-                        followers
-                      </span>
-                    </p>
-                    <p className="profile-post-followers-following-text">
-                      {followingCount}
-                      <span className="profile-post-followers-following-span">
-                        following
-                      </span>
-                    </p>
+                  <div>
+                    <p className="profile-user-name-lg">{userName}</p>
+                    <div className="profile-post-followers-following-count-card">
+                      <p className="profile-post-followers-following-text">
+                        {postsCount}
+                        <span className="profile-post-followers-following-span">
+                          posts
+                        </span>
+                      </p>
+                      <p className="profile-post-followers-following-text">
+                        {followersCount}
+                        <span className="profile-post-followers-following-span">
+                          followers
+                        </span>
+                      </p>
+                      <p className="profile-post-followers-following-text">
+                        {followingCount}
+                        <span className="profile-post-followers-following-span">
+                          following
+                        </span>
+                      </p>
+                    </div>
+                    <div className="profile-user-id-bio-card-lg">
+                      <p className="profile-user-id-lg">{userId}</p>
+                      <p className="profile-user-bio-lg">{userBio}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="profile-user-id-bio-card">
@@ -127,8 +136,8 @@ class MyProfile extends Component {
           }
 
           const renderUserStory = () => {
-            const {myProfileData} = this.state
-            const {stories} = myProfileData
+            const {userProfileData} = this.state
+            const {stories} = userProfileData
 
             return (
               <ul className="profile-user-stories-list">
@@ -146,8 +155,8 @@ class MyProfile extends Component {
           }
 
           const renderUserPost = () => {
-            const {myProfileData} = this.state
-            const {posts} = myProfileData
+            const {userProfileData} = this.state
+            const {posts} = userProfileData
 
             return (
               <div className="profile-post-image-icon-card">
@@ -182,7 +191,7 @@ class MyProfile extends Component {
           const renderFailureView = () => <div>Story Failure</div>
 
           const renderSuccessFailureView = () => {
-            if (myProfileApiStatus === statusObject.success) {
+            if (userProfileApiStatus === statusObject.success) {
               return renderSuccessView()
             }
 
@@ -190,7 +199,7 @@ class MyProfile extends Component {
           }
 
           const renderMyProfileApiStatus = () => {
-            if (myProfileApiStatus === statusObject.loading) {
+            if (userProfileApiStatus === statusObject.loading) {
               return this.renderLoader()
             }
 
@@ -213,4 +222,4 @@ class MyProfile extends Component {
   }
 }
 
-export default MyProfile
+export default UserProfile

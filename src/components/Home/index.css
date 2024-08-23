@@ -1,3 +1,7 @@
+.home-container {
+  background-color: #fafafa;
+}
+
 .loader-container {
   display: flex;
   align-items: center;
@@ -7,6 +11,10 @@
 }
 
 .home-horizontal-line {
+  display: block;
   width: 100%;
   border: 0.5px solid #c6c6c8;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }

@@ -89,7 +89,7 @@ class UserStories extends Component {
             const {storyUrl, userId, userName} = eachLogo
             return (
               <div className="slick-item" key={userId}>
-                <img className="logo-image" src={storyUrl} alt="company logo" />
+                <img className="logo-image" src={storyUrl} alt="user story" />
                 <p className="story-user-name">{userName}</p>
               </div>
             )
@@ -99,7 +99,24 @@ class UserStories extends Component {
     )
   }
 
-  renderFailureView = () => <div>Story Failure</div>
+  onClickTryAgainBtn = () => {
+    this.setState({storyApiStatus: statusObject.loading}, this.getStories)
+  }
+
+  renderFailureView = () => (
+    <div className="story-failure-card">
+      <p className="story-failure-text">
+        Something went wrong. Please try again
+      </p>
+      <button
+        onClick={this.onClickTryAgainBtn}
+        className="story-failure-try-again-button"
+        type="button"
+      >
+        Try again
+      </button>
+    </div>
+  )
 
   renderStoryApiStatus = () => {
     const {storyApiStatus} = this.state
@@ -112,8 +129,8 @@ class UserStories extends Component {
   }
 
   renderLoader = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={34} width={34} />
+    <div className="loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={54} width={54} />
     </div>
   )
 

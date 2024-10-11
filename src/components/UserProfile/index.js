@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsGrid3X3} from 'react-icons/bs'
+import {BiCamera} from 'react-icons/bi'
 
 import Header from '../Header'
 import UserSearchPosts from '../UserSearchPosts'
@@ -62,9 +63,16 @@ class UserProfile extends Component {
     }
   }
 
+  onClickTryAgainBtn = () => {
+    this.setState(
+      {userProfileApiStatus: statusObject.loading},
+      this.getUserProfileData,
+    )
+  }
+
   renderLoader = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={34} width={34} />
+    <div className="profile-loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={54} width={54} />
     </div>
   )
 
@@ -72,11 +80,7 @@ class UserProfile extends Component {
     return (
       <MyContext.Consumer>
         {value => {
-          const {
-            isSearchClicked,
-            isSearchButtonClicked,
-            updateIsSearchButtonClicked,
-          } = value
+          const {isSearchClicked, isSearchButtonClicked} = value
           const {userProfileApiStatus} = this.state
 
           const renderUserNameBioImage = () => {
@@ -97,7 +101,7 @@ class UserProfile extends Component {
                   <img
                     className="profile-image"
                     src={profilePic}
-                    alt="profile"
+                    alt="user profile"
                   />
                   <div>
                     <p className="profile-user-name-lg">{userName}</p>
@@ -140,17 +144,24 @@ class UserProfile extends Component {
             const {stories} = userProfileData
 
             return (
-              <ul className="profile-user-stories-list">
-                {stories.map(eachStory => (
-                  <li className="profile-user-stories-item" key={eachStory.id}>
-                    <img
-                      className="profile-user-stories-image"
-                      src={eachStory.image}
-                      alt="user story"
-                    />
-                  </li>
-                ))}
-              </ul>
+              <>
+                {stories.length !== 0 && (
+                  <ul className="profile-user-stories-list">
+                    {stories.map(eachStory => (
+                      <li
+                        className="profile-user-stories-item"
+                        key={eachStory.id}
+                      >
+                        <img
+                          className="profile-user-stories-image"
+                          src={eachStory.image}
+                          alt="user story"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </>
             )
           }
 
@@ -164,31 +175,66 @@ class UserProfile extends Component {
                   <BsGrid3X3 className="profile-post-icon" />
                   <p className="profile-post-text">Posts</p>
                 </div>
-                <ul className="profile-post-list">
-                  {posts.map(eachPost => (
-                    <li className="profile-post-item" key={eachPost.id}>
-                      <img
-                        className="profile-post-image"
-                        src={eachPost.image}
-                        alt="user post"
-                      />
-                    </li>
-                  ))}
-                </ul>
+                {posts.length === 0 ? (
+                  <div className="profile-no-post-card">
+                    <div className="profile-no-post-icon-card">
+                      <BiCamera className="profile-no-post-icon" />
+                    </div>
+                    <p className="profile-no-post-text">No Posts Yet</p>
+                  </div>
+                ) : (
+                  <ul className="profile-post-list">
+                    {posts.map(eachPost => (
+                      <li className="profile-post-item" key={eachPost.id}>
+                        <img
+                          className="profile-post-image"
+                          src={eachPost.image}
+                          alt="user post"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )
           }
 
-          const renderSuccessView = () => (
-            <div className="profile-card">
-              {renderUserNameBioImage()}
-              {renderUserStory()}
-              <hr className="user-profile-horizontal-line" />
-              {renderUserPost()}
+          const renderSuccessView = () => {
+            const {userProfileData} = this.state
+            const {stories} = userProfileData
+
+            return (
+              <div className="profile-card">
+                {renderUserNameBioImage()}
+                {renderUserStory()}
+                <hr
+                  style={{marginTop: `${stories.length === 0 && '20px'}`}}
+                  className="user-profile-horizontal-line"
+                />
+                {renderUserPost()}
+              </div>
+            )
+          }
+
+          const renderFailureView = () => (
+            <div className="profile-failure-card">
+              <img
+                className="profile-failure-image"
+                src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724481566/alert-triangle_4x_klflni.png"
+                alt="failure view"
+              />
+              <p className="profile-failure-text">
+                Something went wrong. Please try again
+              </p>
+              <button
+                onClick={this.onClickTryAgainBtn}
+                className="profile-failure-try-again-button"
+                type="button"
+              >
+                Try again
+              </button>
             </div>
           )
-
-          const renderFailureView = () => <div>Story Failure</div>
 
           const renderSuccessFailureView = () => {
             if (userProfileApiStatus === statusObject.success) {
@@ -198,7 +244,7 @@ class UserProfile extends Component {
             return renderFailureView()
           }
 
-          const renderMyProfileApiStatus = () => {
+          const renderUserProfileApiStatus = () => {
             if (userProfileApiStatus === statusObject.loading) {
               return this.renderLoader()
             }
@@ -213,7 +259,7 @@ class UserProfile extends Component {
               {isSearchButtonClicked && <UserSearchPosts />}
               {!isSearchClicked &&
                 !isSearchButtonClicked &&
-                renderMyProfileApiStatus()}
+                renderUserProfileApiStatus()}
             </div>
           )
         }}

@@ -25,12 +25,9 @@
 }
 
 .header-logo-button {
-  background-color: transparent;
-  border: none;
+  text-decoration: none;
   padding: 0px;
   margin: 0px;
-  cursor: pointer;
-  outline: none;
 }
 
 .header-insta-share-img {

@@ -114,7 +114,29 @@ class UserPosts extends Component {
     )
   }
 
-  renderFailureView = () => <div>Story Failure</div>
+  onClickTryAgainBtn = () => {
+    this.setState({postApiStatus: statusObject.loading}, this.getPosts)
+  }
+
+  renderFailureView = () => (
+    <div className="post-failure-card">
+      <img
+        className="post-failure-image"
+        src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724481566/alert-triangle_4x_klflni.png"
+        alt="failure view"
+      />
+      <p className="post-failure-text">
+        Something went wrong. Please try again
+      </p>
+      <button
+        onClick={this.onClickTryAgainBtn}
+        className="post-failure-try-again-button"
+        type="button"
+      >
+        Try again
+      </button>
+    </div>
+  )
 
   renderStoryApiStatus = () => {
     const {postApiStatus} = this.state
@@ -127,8 +149,8 @@ class UserPosts extends Component {
   }
 
   renderLoader = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={34} width={34} />
+    <div className="post-loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={54} width={54} />
     </div>
   )
 

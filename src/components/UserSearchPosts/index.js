@@ -14,9 +14,8 @@ const statusObject = {
 }
 
 const UserSearchPosts = () => {
-  const {searchInput, searchApiStatus, updateSearchApiStatus} = useContext(
-    MyContext,
-  )
+  const {searchInput, searchApiStatus, updateSearchApiStatus} =
+    useContext(MyContext)
 
   const [searchPostList, setSearchPostList] = useState([])
 
@@ -58,10 +57,10 @@ const UserSearchPosts = () => {
     }
   }
 
-  const renderSuccessView = () => (
+  const renderSearchResult = () => (
     <>
       <div className="search-result-text-card">
-        <p className="search-result-text">Search Results</p>
+        <h1 className="search-result-text">Search Results</h1>
       </div>
       <ul className="user-post-list">
         {searchPostList.map(eachItem => (
@@ -76,7 +75,51 @@ const UserSearchPosts = () => {
     </>
   )
 
-  const renderFailureView = () => <div>Story Failure</div>
+  const renderSearchNotFound = () => (
+    <div className="search-post-not-found-card">
+      <img
+        className="search-post-not-found-image"
+        src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724483857/Group_20x_1_zxrq5h.png"
+        alt="search not found"
+      />
+      <h1 className="search-post-not-found-text">Search Not Found</h1>
+      <p className="search-post-not-found-desp">
+        Try different keyword or search again
+      </p>
+    </div>
+  )
+
+  const renderSuccessView = () => {
+    if (searchPostList.length === 0) {
+      return renderSearchNotFound()
+    }
+
+    return renderSearchResult()
+  }
+
+  const onClickTryAgainBtn = () => {
+    updateSearchApiStatus(statusObject.loading)
+  }
+
+  const renderFailureView = () => (
+    <div className="search-post-failure-card">
+      <img
+        className="search-post-failure-image"
+        src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724482675/Group_7522_10x_likiih.png"
+        alt="failure view"
+      />
+      <p className="search-post-failure-text">
+        Something went wrong. Please try again
+      </p>
+      <button
+        onClick={onClickTryAgainBtn}
+        className="search-post-failure-try-again-button"
+        type="button"
+      >
+        Try again
+      </button>
+    </div>
+  )
 
   const renderStoryApiStatus = () => {
     if (searchApiStatus === statusObject.success) {
@@ -87,8 +130,8 @@ const UserSearchPosts = () => {
   }
 
   const renderLoader = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={34} width={34} />
+    <div className="search-loader-container" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={54} width={54} />
     </div>
   )
 

@@ -274,3 +274,102 @@
   width: 100%;
   border: 0.5px solid #c6c6c8;
 }
+
+.profile-failure-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80vh;
+  @media screen and (min-width: 768px) {
+    width: 74%;
+  }
+}
+
+.profile-failure-image {
+  width: 24px;
+  height: 24px;
+  @media screen and (min-width: 768px) {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.profile-failure-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.profile-failure-try-again-button {
+  background-color: #4094ef;
+  width: 102px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.profile-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.profile-no-post-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50vh;
+  @media screen and (min-width: 768px) {
+    min-height: 80vh;
+  }
+}
+
+.profile-no-post-icon-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #262626;
+  @media screen and (min-width: 768px) {
+    width: 86px;
+    height: 86px;
+  }
+}
+
+.profile-no-post-icon {
+  width: 30px;
+  height: 26px;
+  @media screen and (min-width: 768px) {
+    width: 48px;
+    height: 45px;
+  }
+}
+
+.profile-no-post-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 300;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+}

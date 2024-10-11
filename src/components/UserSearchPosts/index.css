@@ -41,3 +41,98 @@
     font-size: 24px;
   }
 }
+
+.search-post-failure-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80vh;
+  @media screen and (min-width: 768px) {
+    width: 74%;
+  }
+}
+
+.search-post-failure-image {
+  width: 80%;
+  @media screen and (min-width: 768px) {
+    width: 40%;
+  }
+}
+
+.search-post-failure-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.search-post-failure-try-again-button {
+  background-color: #4094ef;
+  width: 102px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.search-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.search-post-not-found-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80vh;
+  @media screen and (min-width: 768px) {
+    width: 74%;
+    min-height: 100vh;
+  }
+}
+
+.search-post-not-found-image {
+  width: 80%;
+  @media screen and (min-width: 768px) {
+    width: 40%;
+  }
+}
+
+.search-post-not-found-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.search-post-not-found-desp {
+  color: #989898;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
+}

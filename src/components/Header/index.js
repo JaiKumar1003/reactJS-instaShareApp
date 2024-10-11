@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {IoMenu, IoCloseCircle} from 'react-icons/io5'
 import {FaSearch} from 'react-icons/fa'
 import Cookies from 'js-cookie'
@@ -76,6 +76,7 @@ class Header extends Component {
                 placeholder="Search Caption"
               />
               <button
+                testid="searchIcon"
                 onClick={onClickSearchButton}
                 aria-label="search icon"
                 type="button"
@@ -87,15 +88,12 @@ class Header extends Component {
           )
 
           const onClickProfileBtn = () => {
-            const {history} = this.props
-            history.push('/my-profile')
             updateIsSearchButtonClicked(false)
+            updateIsMenuClicked(false)
             updateSearchInput('')
           }
 
           const onClickHomeBtn = () => {
-            const {history} = this.props
-            history.push('/')
             updateIsSearchButtonClicked(false)
             updateIsMenuClicked(false)
             updateSearchInput('')
@@ -106,15 +104,16 @@ class Header extends Component {
             const {currentPathName} = this.state
             return (
               <div className="header-home-profile-logout-card">
-                <button
-                  type="button"
+                <Link
                   onClick={onClickHomeBtn}
+                  type="button"
+                  to="/"
                   className={`header-home-profile-btn ${
                     currentPathName === '/' && 'add-style'
                   }`}
                 >
                   Home
-                </button>
+                </Link>
                 <button
                   onClick={onClickSearch}
                   className="header-search-text-button"
@@ -122,15 +121,16 @@ class Header extends Component {
                 >
                   Search
                 </button>
-                <button
-                  type="button"
+                <Link
                   onClick={onClickProfileBtn}
+                  type="button"
+                  to="/my-profile"
                   className={`header-home-profile-btn ${
                     currentPathName === '/my-profile' && 'add-style'
                   }`}
                 >
                   Profile
-                </button>
+                </Link>
                 <button
                   onClick={this.onClickLogoutButton}
                   className="header-logout-button"
@@ -154,18 +154,19 @@ class Header extends Component {
             <div className="header-container">
               <div className="header-website-logo-menu-card">
                 <div className="header-insta-share-img-text-card">
-                  <button
+                  <Link
+                    onClick={onClickHomeBtn}
                     className="header-logo-button"
                     type="button"
-                    onClick={onClickHomeBtn}
+                    to="/"
                   >
                     <img
                       className="header-insta-share-img"
                       src="https://res.cloudinary.com/dojcy1a17/image/upload/v1724140810/Standard_Collection_8_2x_rmjdky.png"
                       alt="website logo"
                     />
-                  </button>
-                  <p className="header-insta-share-text">Insta Share</p>
+                  </Link>
+                  <h1 className="header-insta-share-text">Insta Share</h1>
                 </div>
                 <div className="header-search-home-profile-logout-card-lg">
                   {renderSearchCard()}

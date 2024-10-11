@@ -56,3 +56,32 @@ Previous Arrow buttons according to your project */
 .slick-next {
   transform: translateY(-160%); /* Center them relative to their height */
 }
+
+.story-failure-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.story-failure-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.story-failure-try-again-button {
+  background-color: #4094ef;
+  width: 90px;
+  height: 26px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}

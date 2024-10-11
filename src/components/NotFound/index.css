@@ -1,0 +1,72 @@
+.page-not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.page-not-found-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  min-height: 100vh;
+}
+
+.page-not-found-image {
+  width: 157px;
+  height: 173px;
+  @media screen and (min-width: 768px) {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.page-not-found-heading {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 32px;
+  margin-bottom: 0px;
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.page-not-found-desp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #989898;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 24px;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+.page-not-found-button {
+  background-color: #4094ef;
+  width: 114px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    width: 141px;
+    height: 48px;
+    font-size: 14px;
+  }
+}

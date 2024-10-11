@@ -5,6 +5,8 @@ import Login from './components/Login'
 import Home from './components/Home'
 import UserProfile from './components/UserProfile'
 import MyProfile from './components/MyProfile'
+import NotFound from './components/NotFound'
+import ProtectedRoutes from './components/ProtectedRoutes'
 import MyContext from './context/MyContext'
 
 import './App.css'
@@ -83,9 +85,10 @@ class App extends Component {
       >
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/my-profile" component={MyProfile} />
-          <Route exact path="/users/:id" component={UserProfile} />
+          <ProtectedRoutes exact path="/" component={Home} />
+          <ProtectedRoutes exact path="/my-profile" component={MyProfile} />
+          <ProtectedRoutes exact path="/users/:id" component={UserProfile} />
+          <Route component={NotFound} />
         </Switch>
       </MyContext.Provider>
     )

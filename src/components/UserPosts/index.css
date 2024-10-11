@@ -23,3 +23,58 @@
   width: 100%;
   list-style-type: none;
 }
+
+.post-failure-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 74%;
+  height: 80vh;
+  @media screen and (min-width: 768px) {
+    border: 1px solid #dbdbdb;
+    margin-bottom: 50px;
+  }
+}
+
+.post-failure-image {
+  width: 24px;
+  height: 24px;
+  @media screen and (min-width: 768px) {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.post-failure-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.post-failure-try-again-button {
+  background-color: #4094ef;
+  width: 102px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+
+.post-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 80vh;
+}

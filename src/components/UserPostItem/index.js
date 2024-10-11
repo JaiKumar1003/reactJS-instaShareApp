@@ -1,12 +1,20 @@
+import {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {BsHeart} from 'react-icons/bs'
 import {FaRegComment} from 'react-icons/fa'
 import {BiShareAlt} from 'react-icons/bi'
 import {FcLike} from 'react-icons/fc'
 
+import MyContext from '../../context/MyContext'
+
 import './index.css'
 
 const UserPostItem = props => {
+  const {
+    updateIsSearchButtonClicked,
+    updateIsSearchClicked,
+    updateIsMenuClicked,
+  } = useContext(MyContext)
   const {postItem, initiateLikeApi} = props
   const {
     comments,
@@ -23,15 +31,25 @@ const UserPostItem = props => {
   const postImg = postDetails.image_url
   const {caption} = postDetails
 
+  const onClickUserName = () => {
+    updateIsSearchButtonClicked(false)
+    updateIsSearchClicked(false)
+    updateIsMenuClicked(false)
+  }
+
   const renderUserNamePostImg = () => (
     <>
       <div className="post-item-user-img-name-card">
         <img
           className="post-item-user-img"
           src={profilePic}
-          alt="user profile"
+          alt="post author profile"
         />
-        <Link className="link-el" to={`/users/${userId}`}>
+        <Link
+          className="link-el"
+          to={`/users/${userId}`}
+          onClick={onClickUserName}
+        >
           <p className="post-item-user-name">{userName}</p>
         </Link>
       </div>
@@ -57,6 +75,7 @@ const UserPostItem = props => {
           aria-label="liked icon"
           onClick={onClickLikedButton}
           className="post-item-icons-button"
+          testid="unLikeIcon"
         >
           <FcLike className="post-item-icons" />
         </button>
@@ -66,6 +85,7 @@ const UserPostItem = props => {
           aria-label="like icon"
           onClick={onClickUnlikeButton}
           className="post-item-icons-button"
+          testid="likeIcon"
         >
           <BsHeart className="post-item-icons" />
         </button>
@@ -101,11 +121,11 @@ const UserPostItem = props => {
 
           return (
             <li className="post-item-comment" key={commentUserId}>
-              <p className="post-comment-user-name">
-                <Link to={`/users/${commentUserId}`} className="link-el">
+              <p className="post-comment">
+                <span className="post-comment-user-name">
                   {commentUserName}
-                </Link>
-                <span className="post-comment">{` ${comment}`}</span>
+                </span>
+                {` ${comment}`}
               </p>
             </li>
           )
